@@ -15,13 +15,12 @@
             <form class="m-5">
                 <div class="form-row">
                     <div class="col">
-                        <input type="text" name="firstName" class="form-control" id="firstName"
-                            placeholder="First name">
+                        <input type="text" name="" class="form-control" id="first" placeholder="First name">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" name="lastName" id="lastName" placeholder="Last name">
+                        <input type="text" class="form-control" name="lastName" id="last" placeholder="Last name">
                     </div>
-                    <button @click="add(firstName, lastName)" class="btn">Add</button>
+                    <button @click="add()" class="btn">Add</button>
                 </div>
             </form>
             <table class="table">
@@ -37,7 +36,7 @@
                         <td>{{p.name}}</td>
                         <td>{{p.timeIn}}</td>
                         <td>
-                            <button @click="remove(index)" class="btn btn-warning">remove</button>
+                            <button @click="remove(p.index)" class="btn btn-warning">remove</button>
                         </td>
                     </tr>
                 </tbody>
@@ -60,24 +59,42 @@
                 return this.people.length;
             }
         },
+        created: function () {
+            this.add();
+        },
         methods: {
             remove: function (index) {
                 this.people.splice(index, 1)
             },
-            add: function (firstName, lastName) {
-                var name = firstName + " " + lastName
+            add: function () {
+                var first = document.getElementById("first")
+                var last = document.getElementById("last")
+                var name = first + " " + last;
                 var today = new Date();
                 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                vm.people[vm.people.length] = new Person(name, time);
+                this.people[this.people.length] = new Person(name, time);
+                created();
+            },
+            getName: function (p) {
+                if (p.name.length > 0) {
+                    return p.name;
+                }
+                return 'N/A';
+            },
+            getTime: function (p) {
+                if (p.time.length > 0) {
+                    return p.time;
+                }
+                return 'N/A';
             }
         }
     })
     class Person {
         name
-        timeIn
-        constructor(name, timeIn) {
+        time
+        constructor(name, time) {
             this.name = name
-            this.timeIn = timeIn
+            this.timeIn = time
         }
         getName() {
             return this.name
