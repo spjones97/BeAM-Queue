@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-
-<!-- import bootstrap -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-
-<div id="app">
+<template>
     <div class="container">
         <div class="card mt-5">
             <h2 class="card-header" style="text-align: center;">Laser Cutter Queue</h2>
@@ -21,10 +15,10 @@
             <form v-cloak class="m-3">
                 <div class="form-row">
                     <div class="col">
-                        <input type="text" v-model="firstName" placeholder="First Name">
+                        <input type="text" v-model="firstName" placeholder="First Name" />
                     </div>
                     <div class="col">
-                        <input type="text" v-model="lastName" placeholder="Last Name">
+                        <input type="text" v-model="lastName" placeholder="Last Name" />
                     </div>
                     <div class="col">
                         <button type="button" @click="addPerson(firstName, lastName)" class="btn">Add</button>
@@ -49,11 +43,11 @@
                         <td>{{ getName(index) }}</td>
                         <td>{{ getTime(index) }}</td>
                         <td>
-                            <input type="checkbox" id="checkOne">
+                            <input type="checkbox" id="checkOne" />
                             <label for="checkOne">#1</label>
-                            <input type="checkbox" id="checkTwo">
+                            <input type="checkbox" id="checkTwo" />
                             <label for="checkTwo">#2</label>
-                            <input type="checkbox" id="checkThree">
+                            <input type="checkbox" id="checkThree" />
                             <label for="checkThree">#3</label>
                         </td>
                         <td>
@@ -64,22 +58,17 @@
             </table>
         </div>
     </div>
-</div>
-
-<!-- import vue.js scripts -->
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+</template>
 
 <script>
-    var vm = new Vue({
-        el: "#app",
-        data: {
-            people: [],
-            times: [],
-            firstName: '',
-            lastName: ''
+    export default {
+        name: "LaserQueue",
+        props: {
+            people: Array,
+            times: Array
         },
         computed: {
-            // Calculates 
+            // Calculates number of people in queue
             numPeople: function () {
                 return this.people.length;
             }
@@ -107,5 +96,5 @@
                 this.times.splice(index, 1);
             }
         }
-    })
+    };
 </script>
