@@ -7,7 +7,16 @@
       integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
       crossorigin="anonymous"
     />
-    <LaserQueue :people="people" :times="times" :firstName="firstName" :lastName="lastName" />
+    <LaserQueue
+      :onQueue="onQueue"
+      :onCutter="onCutter"
+      :timeIn="timeIn"
+      :times="times"
+      :cutTimes="cutTimes"
+      :time="time"
+      :firstName="firstName"
+      :lastName="lastName"
+    />
   </div>
 </template>
 
@@ -21,8 +30,12 @@ export default {
   },
   data() {
     return {
-      people: [],
+      onQueue: [],
+      onCutter: [],
+      timeIn: [],
       times: [],
+      cutTimes: [],
+      time: 0,
       firstName: "",
       lastName: ""
     };
@@ -38,5 +51,24 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.signcontainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.firstin {
+  width: 25vw;
+}
+
+.lastin {
+  width: 25vw;
+}
+
+.oncutter-header,
+.onqueue-header,
+.signup-header {
+  text-align: center;
+  text-decoration: underline;
 }
 </style>
