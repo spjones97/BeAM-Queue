@@ -12,7 +12,7 @@
             <th>#</th>
             <th>Name</th>
             <th>Start Time</th>
-            <th>Timer</th>
+            <th>Expected End Time</th>
             <th>Remove</th>
           </thead>
           <tbody>
@@ -113,9 +113,7 @@ export default {
     // Returns the current time
     currentTime: function() {
       var today = new Date();
-      return (
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
-      );
+      return today.toLocaleTimeString();
     }
   },
   methods: {
@@ -124,15 +122,16 @@ export default {
       var name = first + " " + last;
       this.onQueue[this.onQueue.length] = name;
       var today = new Date();
-      this.timeIn[this.timeIn.length] =
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      this.timeIn[this.timeIn.length] = today.toLocaleTimeString();
       this.onQueue.splice();
       this.timeIn.splice();
     },
     // Add person from the Queue to the Laser Cutter
     addToCutter: function(index, time) {
       this.onCutter[this.onCutter.length] = this.onQueue[index];
-      this.times[this.times.length] = time;
+      var now = new Date();
+      now.setMinutes(now.getMinutes() + parseInt(time));
+      this.times[this.times.length] = now.toLocaleTimeString();
       this.onQueue.splice(index, 1);
       this.onCutter.splice();
     },

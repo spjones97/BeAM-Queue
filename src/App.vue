@@ -7,6 +7,7 @@
       integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
       crossorigin="anonymous"
     />
+    <!-- import Beam Queue script -->
     <LaserQueue
       :onQueue="onQueue"
       :onCutter="onCutter"
