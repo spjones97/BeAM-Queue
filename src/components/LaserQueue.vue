@@ -3,11 +3,14 @@
     <div class="container">
       <div class="card">
         <!-- Main Card header -->
-        <h1 class="card-header" style="text-align: center;">BEAM LASER CUTTER QUEUE</h1>
+        <h1 class="card-header main-header" style="text-align: center;">LASER CUTTER QUEUE</h1>
 
         <!-- On-Cutter Table -->
-        <h3 class="oncutter-header">On Cutter</h3>
-        <table class="table">
+        <table v-cloak v-if="onCutter.length > 0" class="table">
+          <h3 v-cloak v-if="onCutter.length > 0" class="cutter-header" style="text-align: center;">
+            On
+            Cutter
+          </h3>
           <thead class="thead-light">
             <th>#</th>
             <th>Name</th>
@@ -15,12 +18,12 @@
             <th>Expected End Time</th>
             <th>Remove</th>
           </thead>
-          <tbody>
+          <tbody class="cutter-body">
             <tr v-cloak v-for="(p, index) in onCutter" :key="index">
               <td>{{ index + 1 }}</td>
               <td>{{ getCutterName(index) }}</td>
               <td>{{ currentTime }}</td>
-              <td>{{ getTime(index) }}</td>
+              <td id="timer">{{ getTime(index) }}</td>
               <td>
                 <button type="button" @click="removeCutter(index)" class="btn btn-warning">REMOVE</button>
               </td>
@@ -29,7 +32,7 @@
         </table>
 
         <!-- Sign-Up Form Header -->
-        <h3 class="signup-header">Sign-In</h3>
+        <h2 class="sign-header" style="text-align: center;">Sign In</h2>
 
         <!-- Sign-Up Form -->
         <div class="signcontainer">
@@ -48,11 +51,9 @@
           </form>
         </div>
 
-        <!-- On-Queue Header -->
-        <h3 class="onqueue-header">On Queue</h3>
-
         <!-- On-Queue Table -->
         <table class="table">
+          <h3 class="queue-header" style="text-align: center;">On Queue</h3>
           <thead class="thead-light">
             <th>#</th>
             <th>Name</th>
@@ -75,7 +76,7 @@
                 <label for="checkThree">#3</label>
               </td>
               <td>
-                <input id="minInput" type="text" v-model="time" placeholder="min" />
+                <input type="text" max="90" id="minInput" v-model="time" placeholder="min" />
               </td>
               <td>
                 <button type="button" @click="addToCutter(index, time)" class="btn">ADD</button>

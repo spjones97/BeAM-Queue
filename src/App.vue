@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <link rel="icon" href="../public/beamfavicon.ico" />
+    <title>Laser Cutter Queue</title>
     <!-- import bootstrap -->
     <link
       rel="stylesheet"
@@ -66,10 +68,32 @@ export default {
   width: 25vw;
 }
 
-.oncutter-header,
-.onqueue-header,
-.signup-header {
-  text-align: center;
-  text-decoration: underline;
+body {
+  background-color: rgb(7, 7, 75);
+}
+
+.card {
+  display: flex;
+  align-self: center;
+  margin-top: 5%;
+}
+
+.main-header {
+  background-color: white;
+  color: rgb(7, 7, 75);
+}
+
+.cutter-header {
+  background-color: red;
+  color: white;
+}
+
+.queue-header {
+  color: rgb(7, 7, 75);
+  background-color: rgb(255, 230, 0);
+}
+
+.cutter-body {
+  outline: solid red;
 }
 </style>
