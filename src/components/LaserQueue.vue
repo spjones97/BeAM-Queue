@@ -47,7 +47,12 @@
                 <input class="lastin" type="text" v-model="lastName" placeholder="Last Name" />
               </div>
               <div class="col">
-                <button type="button" @click="addToQueue(firstName, lastName)" id="queuebtn">ADD</button>
+                <button
+                  class="btn"
+                  type="button"
+                  @click="addToQueue(firstName, lastName)"
+                  id="queuebtn"
+                >ADD</button>
               </div>
             </div>
           </form>
