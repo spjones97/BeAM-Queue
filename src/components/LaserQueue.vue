@@ -3,14 +3,16 @@
     <div class="container">
       <div class="card">
         <!-- Main Card header -->
-        <h1 class="card-header main-header" style="text-align: center;">LASER CUTTER QUEUE</h1>
+        <h1 class="card-header main-header">LASER CUTTER QUEUE</h1>
+
+        <!-- Cutter Header -->
+        <h3 v-cloak v-if="onCutter.length > 0" class="cutter-header">
+          On
+          Cutter
+        </h3>
 
         <!-- On-Cutter Table -->
         <table v-cloak v-if="onCutter.length > 0" class="table">
-          <h3 v-cloak v-if="onCutter.length > 0" class="cutter-header" style="text-align: center;">
-            On
-            Cutter
-          </h3>
           <thead class="thead-light">
             <th>#</th>
             <th>Name</th>
@@ -32,7 +34,7 @@
         </table>
 
         <!-- Sign-Up Form Header -->
-        <h2 class="sign-header" style="text-align: center;">Sign In</h2>
+        <h2 class="sign-header">Sign In</h2>
 
         <!-- Sign-Up Form -->
         <div class="signcontainer">
@@ -51,9 +53,11 @@
           </form>
         </div>
 
+        <!-- Queue header -->
+        <h3 class="queue-header">On Queue</h3>
+
         <!-- On-Queue Table -->
         <table class="table">
-          <h3 class="queue-header" style="text-align: center;">On Queue</h3>
           <thead class="thead-light">
             <th>#</th>
             <th>Name</th>
@@ -160,3 +164,43 @@ export default {
   }
 };
 </script>
+
+<style>
+.signcontainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.firstin {
+  width: 25vw;
+}
+
+.lastin {
+  width: 25vw;
+}
+
+.card {
+  display: flex;
+  align-self: center;
+  margin-top: 5%;
+}
+
+.main-header {
+  background-color: white;
+  color: rgb(7, 7, 75);
+}
+
+.cutter-header {
+  background-color: red;
+  color: white;
+}
+
+.queue-header {
+  color: rgb(7, 7, 75);
+  background-color: rgb(255, 230, 0);
+}
+
+.cutter-body {
+  outline: solid red;
+}
+</style>
