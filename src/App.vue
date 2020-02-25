@@ -13,6 +13,7 @@
       :onCutter="onCutter"
       :timeIn="timeIn"
       :times="times"
+      :timeOn="timeOn"
       :cutTimes="cutTimes"
       :time="time"
       :firstName="firstName"
@@ -36,6 +37,7 @@ export default {
       timeIn: [],
       times: [],
       cutTimes: [],
+      timeOn: [],
       time: 0,
       firstName: "",
       lastName: ""

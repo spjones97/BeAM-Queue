@@ -3,10 +3,10 @@
     <div class="container">
       <div class="card">
         <!-- Main Card header -->
-        <h1 class="card-header main-header">LASER CUTTER QUEUE</h1>
+        <h1 class="card-header main-header" style="text-align: center;">LASER CUTTER QUEUE</h1>
 
         <!-- Cutter Header -->
-        <h3 v-cloak v-if="onCutter.length > 0" class="cutter-header">
+        <h3 v-cloak v-if="onCutter.length > 0" class="cutter-header" style="text-align: center;">
           On
           Cutter
         </h3>
@@ -24,7 +24,7 @@
             <tr v-cloak v-for="(p, index) in onCutter" :key="index">
               <td>{{ index + 1 }}</td>
               <td>{{ getCutterName(index) }}</td>
-              <td>{{ currentTime }}</td>
+              <td>{{ getTimeOn(index) }}</td>
               <td id="timer">{{ getTime(index) }}</td>
               <td>
                 <button type="button" @click="removeCutter(index)" class="btn btn-warning">REMOVE</button>
@@ -34,7 +34,7 @@
         </table>
 
         <!-- Sign-Up Form Header -->
-        <h2 class="sign-header">Sign In</h2>
+        <h2 class="sign-header" style="text-align: center;">Sign In</h2>
 
         <!-- Sign-Up Form -->
         <div class="signcontainer">
@@ -58,8 +58,8 @@
           </form>
         </div>
 
-        <!-- Queue header -->
-        <h3 class="queue-header">On Queue</h3>
+        <!-- Queue Header -->
+        <h3 class="queue-header" style="text-align: center;">On Queue</h3>
 
         <!-- On-Queue Table -->
         <table class="table">
@@ -71,7 +71,7 @@
             <th>Time</th>
             <th>Add to Cutter</th>
           </thead>
-          <tbody>
+          <tbody class="queue-body">
             <tr v-cloak v-for="(p, index) in onQueue" :key="index">
               <td>{{ index + 1 }}</td>
               <td>{{ getQueueName(index) }}</td>
@@ -105,6 +105,7 @@ export default {
     onQueue: Array,
     onCutter: Array,
     timeIn: Array,
+    timeOn: Array,
     times: Array,
     cutTimes: Array,
     time: Number,
@@ -119,52 +120,63 @@ export default {
     // Returns number of people on the Laser Cutter
     numCutter: function() {
       return this.onCutter.length;
-    },
-    // Returns the current time
-    currentTime: function() {
-      var today = new Date();
-      return today.toLocaleTimeString();
     }
   },
   methods: {
-    // Add person to the Queue
+    // Add person to the queue
     addToQueue: function(first, last) {
       var name = first + " " + last;
       this.onQueue[this.onQueue.length] = name;
       var today = new Date();
+      // HH:MM AM/PM Format
       this.timeIn[this.timeIn.length] = today.toLocaleTimeString();
       this.onQueue.splice();
       this.timeIn.splice();
     },
-    // Add person from the Queue to the Laser Cutter
+    // Add person from queue to cutter
     addToCutter: function(index, time) {
       this.onCutter[this.onCutter.length] = this.onQueue[index];
       var now = new Date();
+      this.timeOn[this.timeOn.length] = now.toLocaleTimeString();
       now.setMinutes(now.getMinutes() + parseInt(time));
+      // HH:MM AM/PM Format
       this.times[this.times.length] = now.toLocaleTimeString();
       this.onQueue.splice(index, 1);
+      this.timeIn.splice(index, 1);
       this.onCutter.splice();
     },
-    // Removes person from the Laser Cutter
+    // Remove person from the cutter
     removeCutter: function(index) {
+      this.timeOn.splice(index, 1);
       this.onCutter.splice(index, 1);
       this.cutTimes.splice(index, 1);
+      this.times.splice(index, 1);
     },
-    // Returns Name of person in the Queue
+    // Get name from person in the queue
     getQueueName: function(index) {
       return this.onQueue[index];
     },
-    // Returns Name of person on the Cutter
+    // Get name from person on the cutter
     getCutterName: function(index) {
       return this.onCutter[index];
     },
-    // Returns Time person checked in
+    // Get time person signs in
     getTimeIn: function(index) {
       return this.timeIn[index];
     },
-    // Returns amount of Time cut is going to take
+    // Get input cut time amount
     getTime: function(index) {
       return this.times[index];
+    },
+    // Get time person was moved to the cutter
+    getTimeOn: function(index) {
+      return this.timeOn[index];
+    },
+    // Get the current time
+    getCurrent: function() {
+      var today = new Date();
+      // HH:MM AM/PM Format
+      return today.toLocaleTimeString();
     }
   }
 };
@@ -192,20 +204,26 @@ export default {
 
 .main-header {
   background-color: white;
-  color: rgb(7, 7, 75);
+  color: rgb(2, 196, 255);
 }
 
 .cutter-header {
   background-color: red;
   color: white;
+  margin-bottom: 0;
 }
 
 .queue-header {
   color: rgb(7, 7, 75);
   background-color: rgb(255, 230, 0);
+  margin-bottom: 0;
 }
 
 .cutter-body {
   outline: solid red;
+}
+
+.queue-body {
+  outline: solid rgb(2, 196, 255);
 }
 </style>
