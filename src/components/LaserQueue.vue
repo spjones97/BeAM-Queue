@@ -2,14 +2,17 @@
   <div id="app">
     <div class="container">
       <div class="card">
-        <!-- Main Card header -->
-        <h1 class="card-header main-header" style="text-align: center;">LASER CUTTER QUEUE</h1>
+        <queue-header>
+          <span>LASER CUTTER QUEUE</span>
+        </queue-header>
 
         <!-- Cutter Header -->
-        <h3 v-cloak v-if="onCutter.length > 0" class="cutter-header" style="text-align: center;">
-          On
-          Cutter
-        </h3>
+        <h3
+          v-cloak
+          v-if="onCutter.length > 0"
+          class="cutter-header"
+          style="text-align: center;"
+        >On Cutter</h3>
 
         <!-- On-Cutter Table -->
         <table v-cloak v-if="onCutter.length > 0" class="table">
@@ -99,8 +102,13 @@
 </template>
 
 <script>
+import QueueHeader from "./QueueHeader";
+
 export default {
   name: "LaserQueue",
+  components: {
+    QueueHeader
+  },
   props: {
     onQueue: Array,
     onCutter: Array,
@@ -178,6 +186,7 @@ export default {
       // HH:MM AM/PM Format
       return today.toLocaleTimeString();
     }
+    // Add Alert when time is up
   }
 };
 </script>
