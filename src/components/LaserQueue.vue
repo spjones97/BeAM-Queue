@@ -5,39 +5,18 @@
         <queue-header>
           <span>LASER CUTTER QUEUE</span>
         </queue-header>
-
-        <!-- Cutter Header -->
-        <h3
-          v-cloak
-          v-if="onCutter.length > 0"
-          class="cutter-header"
-          style="text-align: center;"
-        >On Cutter</h3>
-
-        <!-- On-Cutter Table -->
-        <table v-cloak v-if="onCutter.length > 0" class="table">
-          <thead class="thead-light">
-            <th>#</th>
-            <th>Name</th>
-            <th>Start Time</th>
-            <th>Expected End Time</th>
-            <th>Remove</th>
-          </thead>
-          <tbody class="cutter-body">
-            <tr v-cloak v-for="(p, index) in onCutter" :key="index">
-              <td>{{ index + 1 }}</td>
-              <td>{{ getCutterName(index) }}</td>
-              <td>{{ getTimeOn(index) }}</td>
-              <td id="timer">{{ getTime(index) }}</td>
-              <td>
-                <button type="button" @click="removeCutter(index)" class="btn btn-warning">REMOVE</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        <!-- Sign-Up Form Header -->
-        <h2 class="sign-header" style="text-align: center;">Sign In</h2>
+        <cutter-header :onCutterRows="onCutter">
+          <span>On Cutter</span>
+        </cutter-header>
+        <cutter-table
+          :onCutterRows="onCutter"
+          :timeOnRows="timeOn"
+          :cutTimeRows="cutTimes"
+          :timeRows="times"
+        ></cutter-table>
+        <sign-up-header>
+          <span>Sign In</span>
+        </sign-up-header>
 
         <!-- Sign-Up Form -->
         <div class="signcontainer">
@@ -103,11 +82,17 @@
 
 <script>
 import QueueHeader from "./QueueHeader";
+import CutterHeader from "./CutterHeader";
+import CutterTable from "./CutterTable";
+import SignUpHeader from "./SignUpHeader";
 
 export default {
   name: "LaserQueue",
   components: {
-    QueueHeader
+    QueueHeader,
+    CutterHeader,
+    CutterTable,
+    SignUpHeader
   },
   props: {
     onQueue: Array,
@@ -216,20 +201,10 @@ export default {
   color: rgb(2, 196, 255);
 }
 
-.cutter-header {
-  background-color: red;
-  color: white;
-  margin-bottom: 0;
-}
-
 .queue-header {
   color: rgb(7, 7, 75);
   background-color: rgb(255, 230, 0);
   margin-bottom: 0;
-}
-
-.cutter-body {
-  outline: solid red;
 }
 
 .queue-body {
