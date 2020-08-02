@@ -53,6 +53,10 @@ export default {
       type: Array,
       required: true,
     },
+    timeRows: {
+      type: Array,
+      required: true,
+    },
     time: Number,
   },
   methods: {
@@ -67,7 +71,7 @@ export default {
       var now = new Date();
       this.timeOnRows[this.timeOnRows.length] = now.toLocaleTimeString();
       now.setMinutes(now.getMinutes() + parseInt(time));
-      this.times[this.times.length] = now.toLocaleTimeString();
+      this.timeRows[this.timeRows.length] = now.toLocaleTimeString();
       this.onQueueRows.splice(index, 1);
       this.timeInRows.splice(index, 1);
       this.onCutterRows.splice();

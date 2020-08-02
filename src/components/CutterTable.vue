@@ -15,9 +15,7 @@
           <td>{{ getTimeOn(index) }}</td>
           <td id="timer">{{ getTime(index) }}</td>
           <td>
-            <button type="button" @click="removeCutter(index)" class="btn btn-warning">
-              <slot></slot>
-            </button>
+            <button type="button" @click="removeCutter(index)" class="btn btn-warning">REMOVE</button>
           </td>
         </tr>
       </tbody>
@@ -30,38 +28,38 @@ export default {
   props: {
     onCutterRows: {
       type: Array,
-      required: true
+      required: true,
     },
     timeOnRows: {
       type: Array,
-      required: true
+      required: true,
     },
     timeRows: {
       type: Array,
-      required: true
+      required: true,
     },
     cutTimeRows: {
       type: Array,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    getCutterName: function(index) {
+    getCutterName: function (index) {
       return this.onCutterRows[index];
     },
-    getTimeOn: function(index) {
+    getTimeOn: function (index) {
       return this.timeOnRows[index];
     },
-    getTime: function(index) {
+    getTime: function (index) {
       return this.timeRows[index];
     },
-    removeCutter: function(index) {
+    removeCutter: function (index) {
       this.timeOnRows.splice(index, 1);
       this.onCutterRows.splice(index, 1);
       this.cutTimeRows.splice(index, 1);
       this.timeRows.splice(index, 1);
-    }
-  }
+    },
+  },
 };
 </script>
 

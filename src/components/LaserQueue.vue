@@ -28,6 +28,7 @@
           :timeInRows="timeIn"
           :onCutterRows="onCutter"
           :timeOnRows="timeOn"
+          :timeRows="times"
         ></on-queue-table>
       </div>
     </div>
