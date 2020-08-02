@@ -20,3 +20,45 @@
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    firstName: String,
+    lastName: String,
+    onQueueRows: {
+      type: Array,
+      required: true,
+    },
+    timeInRows: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    addToQueue: function (first, last) {
+      var name = first + " " + last;
+      this.onQueueRows[this.onQueueRows.length] = name;
+      var today = new Date();
+      this.timeInRows[this.timeInRows.length] = today.toLocaleTimeString();
+      this.onQueueRows.splice();
+      this.timeInRows.splice();
+    },
+  },
+};
+</script>
+
+<style>
+.signcontainer {
+  display: flex;
+  justify-content: space-around;
+}
+
+.firstin {
+  width: 25vw;
+}
+
+.lastin {
+  width: 25vw;
+}
+</style>
